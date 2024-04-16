@@ -13,7 +13,7 @@ long long mod_exp(long long base, long long exp) {
             result = (result * base) % MOD;
         }
         base = (base * base) % MOD; 
-        exp >>= 2;
+        exp >>= 1;
     }
     return result;
 }
