@@ -25,16 +25,15 @@
 ./compresie.cpp:11:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
 ./criptat.cpp:11:  Extra space before ( in function call  [whitespace/parens] [4]
 ./criptat.cpp:14:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-./oferta.cpp:15:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-./oferta.cpp:26:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-./oferta.cpp:26:  Extra space before [  [whitespace/braces] [5]
-./oferta.cpp:29:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-./oferta.cpp:30:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-./oferta.cpp:59:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./oferta.cpp:31:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./oferta.cpp:31:  Extra space before [  [whitespace/braces] [5]
+./oferta.cpp:34:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./oferta.cpp:35:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+./oferta.cpp:64:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
 Done processing ./colorare.cpp
 Done processing ./colorare15.cpp
 Done processing ./compresie.cpp
 Done processing ./criptat.cpp
 Done processing ./oferta.cpp
 Done processing ./servere.cpp
-Total errors found: 33
+Total errors found: 32

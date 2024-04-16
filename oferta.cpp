@@ -1,25 +1,30 @@
 #include <fstream>
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 #include <algorithm>
 
 using namespace std;
 
 #define MAX_LEN 10005
 
-double min_cost(int *prices, int len) {
+
+long double min_cost(int *prices, int len) {
     if (len == 0)
-        return 0;
+        return -1;
 
     if (len == 1) {
-        return (double)prices[0]; 
+        // return 111111;
+        return 1.0 * prices[0];
     } else if (len == 2) {
+        // return 333333;
         return prices[0] + prices[1] - min(prices[0], prices[1]) * 0.5;
     }
 
-    double dp[MAX_LEN] = {0};
-    dp[1] = prices[0];
-    dp[2] = prices[0] + prices[1] - min(prices[0], prices[1]) * 0.5;
+    long double dp[MAX_LEN] = {0.0};
+
+    dp[1] = prices[0] * 1.0;
+    dp[2] = prices[0] * 1.0 + prices[1] * 1.0 - min(prices[0], prices[1]) * 0.5;
 
     for (int i = 3; i < len + 1; ++i) {
         double last_product = dp[i - 1] + prices[i - 1];
@@ -49,8 +54,8 @@ int main(void) {
 
     double res = min_cost(prices, n);
 
-    fout << res;
-    cout << res;
+    fout << fixed << setprecision(1) << res;
+    cout << fixed << setprecision(1) << res;
 
 
     fin.close();
