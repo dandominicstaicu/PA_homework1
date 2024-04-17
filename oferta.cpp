@@ -4,12 +4,15 @@
 #include <iomanip>
 #include <algorithm>
 
+#include <set>
+#include <vector>
+#include <queue>
+
 using namespace std;
 
 #define MAX_LEN 10005
 
-
-long double min_cost(int *prices, int len) {
+double min_cost(int *prices, int len) {
     if (len == 0)
         return -1;
 
@@ -21,7 +24,7 @@ long double min_cost(int *prices, int len) {
         return prices[0] + prices[1] - min(prices[0], prices[1]) * 0.5;
     }
 
-    long double dp[MAX_LEN] = {0.0};
+    double dp[MAX_LEN] = {0.0};
 
     dp[1] = prices[0] * 1.0;
     dp[2] = prices[0] * 1.0 + prices[1] * 1.0 - min(prices[0], prices[1]) * 0.5;
@@ -40,6 +43,7 @@ long double min_cost(int *prices, int len) {
     return dp[len];
 }
 
+
 int main(void) {
     ifstream fin("oferta.in");
     ofstream fout("oferta.out");
@@ -47,12 +51,26 @@ int main(void) {
     int n, k;
     int prices[MAX_LEN];
 
+    // vector<int> prices(MAX_LEN);
+    // int element;
+
+    // fin >> n >> k;
+    // for (int i = 0; i < n; ++i) {
+    //     // fin >> prices[i];
+    //     fin >> element;
+    //     prices.push_back(element);
+    // }
+
     fin >> n >> k;
     for (int i = 0; i < n; ++i) {
         fin >> prices[i];
     }
 
     double res = min_cost(prices, n);
+
+    // double res = kth_min_cost(prices, n, k);
+
+    // double res = kth_min_cost_to_buy_products(prices, k);
 
     fout << fixed << setprecision(1) << res;
     cout << fixed << setprecision(1) << res;

@@ -1,0 +1,320 @@
+#include <fstream>
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+#include <algorithm>
+
+using namespace std;
+
+#define MAX_LEN 10005
+
+double min_cost(int *prices, int len) {
+    if (len == 0)
+        return -1;
+
+    if (len == 1) {
+        // return 111111;
+        return 1.0 * prices[0];
+    } else if (len == 2) {
+        // return 333333;
+        return prices[0] + prices[1] - min(prices[0], prices[1]) * 0.5;
+    }
+
+    double dp[MAX_LEN] = {0.0};
+
+    dp[1] = prices[0] * 1.0;
+    dp[2] = prices[0] * 1.0 + prices[1] * 1.0 - min(prices[0], prices[1]) * 0.5;
+
+    for (int i = 3; i < len + 1; ++i) {
+        double last_product = dp[i - 1] + prices[i - 1];
+        double last_2 = dp[i - 2] + prices [i - 2] + prices [i - 1] - min(prices[i - 2], prices[i - 1]) * 0.5;
+
+        int min_2_prices = min(prices[i - 3], prices[i - 2]);
+        double last_3 = dp[i - 3] + prices[i - 3] + prices[i - 2] + prices[i - 1] - min(min_2_prices, prices[i - 1]);
+    
+        double min_last_2_3 = (last_2 < last_3) ? last_2 : last_3;
+        dp[i] = (last_product < min_last_2_3) ? last_product : min_last_2_3;
+    }
+
+    return dp[len];
+}
+
+int cmp(const void *a, const void *b) {
+    double dbl_a = *((double *)a);
+    double dbl_b = *((double *)b);
+
+    return dbl_a - dbl_b;
+}
+
+double kth_min_cost(int *prices, int len, int k) {
+    if (len == 0) {
+        return -1;
+    }
+
+    // int max_costs = 100000;
+    double *dp = (double *)calloc(MAX_LEN, sizeof(double));
+    int dp_size = 1;
+    dp[0] = 0;
+
+    for (int i = 1; i <= len; ++i) {
+        double *new_dp = (double *)calloc(MAX_LEN, sizeof(double));
+        int new_dp_size = 0;
+
+        for (int j = 0; j < dp_size; ++j) {
+            new_dp[new_dp_size++] = dp[j] + prices[i - 1];
+        }
+
+        if (i > 1) {
+            for (int j = 0; j < dp_size; ++j) {
+                int discount = (prices[i-1] < prices[i-2]) ? prices[i-1] : prices[i-2];
+                new_dp[new_dp_size++] = dp[j] + prices[i-1] + prices[i-2] - discount * 0.5;
+            }
+        }
+
+        if (i > 2) {
+            for (int j = 0; j < dp_size; ++j) {
+                int min_price = prices[i - 1];
+                if (prices[i - 2] < min_price)
+                    min_price = prices[i - 2];
+                if (prices[i - 3] < min_price) 
+                    min_price = prices[i - 3];
+
+                new_dp[new_dp_size++] = dp[j] + prices[i - 1] + prices[i - 2] + prices[i - 3] - min_price;
+            }
+        }
+
+        // free(dp);
+        dp = new_dp;
+        dp_size = new_dp_size;
+    }
+
+    qsort(dp, dp_size, sizeof(double), cmp);
+
+    double result = -1.0;
+    if (k <= dp_size)
+        result = dp[k - 1];
+
+    // free(dp);
+
+
+    return result;
+}
+
+int main(void) {
+    ifstream fin("oferta.in");
+    ofstream fout("oferta.out");
+
+    int n, k;
+    int prices[MAX_LEN];
+
+    fin >> n >> k;
+    for (int i = 0; i < n; ++i) {
+        fin >> prices[i];
+    }
+
+    // double res = min_cost(prices, n);
+
+    double res = kth_min_cost(prices, n, k);
+
+    fout << fixed << setprecision(1) << res;
+    cout << fixed << setprecision(1) << res;
+
+
+    fin.close();
+    fout.close();
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int cmp(const void *a, const void *b) {
+    double dbl_a = *((double *)a);
+    double dbl_b = *((double *)b);
+
+    return dbl_a - dbl_b;
+}
+
+// double kth_min_cost(int *prices, int len, int k) {
+//     if (len == 0) {
+//         return -1;
+//     }
+
+//     // int max_costs = 100000;
+//     // double *dp = (double *)calloc(MAX_LEN, sizeof(double));
+
+
+//     double dp[MAX_LEN] = {0};
+//     int dp_size = 1;
+//     dp[0] = 0;
+
+//     for (int i = 1; i <= len; ++i) {
+//         // double *new_dp = (double *)calloc(MAX_LEN, sizeof(double));
+
+//         double new_dp[MAX_LEN] = {0};
+
+//         int new_dp_size = 0;
+
+//         for (int j = 0; j < dp_size; ++j) {
+//             new_dp[new_dp_size++] = dp[j] + prices[i - 1];
+//         }
+
+//         if (i > 1) {
+//             for (int j = 0; j < dp_size; ++j) {
+//                 int discount = (prices[i-1] < prices[i-2]) ? prices[i-1] : prices[i-2];
+//                 new_dp[new_dp_size++] = dp[j] + prices[i-1] + prices[i-2] - discount * 0.5;
+//             }
+//         }
+
+//         if (i > 2) {
+//             for (int j = 0; j < dp_size; ++j) {
+//                 int min_price = prices[i - 1];
+//                 if (prices[i - 2] < min_price)
+//                     min_price = prices[i - 2];
+//                 if (prices[i - 3] < min_price) 
+//                     min_price = prices[i - 3];
+
+//                 new_dp[new_dp_size++] = dp[j] + prices[i - 1] + prices[i - 2] + prices[i - 3] - min_price;
+//             }
+//         }
+
+//         // free(dp);
+//         dp = new_dp;
+//         dp_size = new_dp_size;
+//     }
+
+//     qsort(dp, dp_size, sizeof(double), cmp);
+
+//     double result = -1.0;
+//     if (k <= dp_size)
+//         result = dp[k - 1];
+
+//     // free(dp);
+
+
+//     return result;
+// }
+
+// double kth_min_cost_to_buy_products(vector<int> prices, int K) {
+//     int N = prices.size();
+//     if (N == 0) {
+//         return -1.0;
+//     }
+
+//     vector<set<double>> dp(N + 1);
+//     dp[0].insert(0.0);  // No cost if no products are bought
+
+//     for (int i = 1; i <= N; ++i) {
+//         // Buy the ith product alone
+//         for (double cost : dp[i-1]) {
+//             dp[i].insert(cost + prices[i-1]);
+//         }
+
+//         if (i > 1) {  // Combine the last two products
+//             for (double cost : dp[i-2]) {
+//                 dp[i].insert(cost + prices[i-1] + prices[i-2] - std::min(prices[i-1], prices[i-2]) * 0.5);
+//             }
+//         }
+
+//         if (i > 2) {  // Combine the last three products
+//             for (double cost : dp[i-3]) {
+//                 dp[i].insert(cost + prices[i-1] + prices[i-2] + prices[i-3] - std::min({prices[i-1], prices[i-2], prices[i-3]}));
+//             }
+//         }
+//     }
+
+
+//     // Extract all unique costs from the final set
+//     std::vector<double> all_costs(dp[N].begin(), dp[N].end());
+//     std::sort(all_costs.begin(), all_costs.end());
+
+//     if (K <= all_costs.size()) {
+//         return all_costs[K-1];
+//     } else {
+//         return -1.0;
+//     }
+// }
+
+double kth_min_cost_to_buy_products(const vector<int>& prices, int K) {
+    int N = prices.size();
+    if (N == 0) {
+        return -1.0;
+    }
+
+    vector<priority_queue<double, vector<double>, greater<double>>> dp(N + 1);
+
+    dp[1].push(prices[0]);
+
+    if (N > 1) {
+        double cost = prices[0] + prices[1] - min(prices[0], prices[1]) * 0.5;
+        dp[2].push(prices[0] + prices[1]);
+        dp[2].push(cost);
+    }
+
+    for (int i = 3; i <= N; ++i) {
+        vector<double> current_costs;
+
+        // Buy the ith product alone
+        while (!dp[i-1].empty()) {
+            double cost = dp[i-1].top() + prices[i-1];
+            current_costs.push_back(cost);
+            dp[i-1].pop();
+        }
+
+        // Combine the last two products
+        while (!dp[i-2].empty()) {
+            double cost = dp[i-2].top() + prices[i-1] + prices[i-2] - min(prices[i-1], prices[i-2]) * 0.5;
+            current_costs.push_back(cost);
+            dp[i-2].pop();
+        }
+
+        // Combine the last three products if possible
+        if (i > 3) {
+            while (!dp[i-3].empty()) {
+                double cost = dp[i-3].top() + prices[i-1] + prices[i-2] + prices[i-3] - min({prices[i-1], prices[i-2], prices[i-3]});
+                current_costs.push_back(cost);
+                dp[i-3].pop();
+            }
+        }
+
+        // Keep only the smallest K unique costs
+        set<double> seen;
+        sort(current_costs.begin(), current_costs.end());
+        for (double cost : current_costs) {
+            if (seen.size() < K && seen.find(cost) == seen.end()) {
+                dp[i].push(cost);
+                seen.insert(cost);
+            }
+            while (dp[i].size() > K) {
+                dp[i].pop();
+            }
+        }
+    }
+
+    vector<double> final_costs;
+    while (!dp[N].empty()) {
+        final_costs.push_back(dp[N].top());
+        dp[N].pop();
+    }
+
+    if (final_costs.size() >= K) {
+        sort(final_costs.begin(), final_costs.end());
+        return final_costs[K - 1];
+    }
+    return -1.0;
+}

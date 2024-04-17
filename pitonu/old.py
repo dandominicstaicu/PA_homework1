@@ -40,7 +40,7 @@ def read_prices_from_file(filename):
     return prices
 
 # Test the function with the given example
-filename = '/home/dominic/Documents/sem_4_facultate/PA/teme/tema1/pitonu/input.in'
+filename = './pitonu/input.in'
 prices = read_prices_from_file(filename)
 min_cost = min_cost_to_buy_products(prices)
 print(f"The minimum cost to buy all products is: {min_cost}")
