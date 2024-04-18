@@ -5,8 +5,7 @@ CCFLAGS = -Wall -Wextra -std=c++17 -O0 -lm
 
 .PHONY: build clean
 
-build: p1 p2 p3 p5
-# p4 p5
+build: p1 p2 p3 p4 p5
 
 # Nu compilați aici, nici măcar ca dependențe de reguli.
 run-p1:
@@ -27,8 +26,8 @@ p2: colorare.cpp
 	$(CC) -o $@ $^ $(CCFLAGS)
 p3: compresie.cpp
 	$(CC) -o $@ $^ $(CCFLAGS)
-# p4: criptat.cpp
-# 	$(CC) -o $@ $^ $(CCFLAGS)
+p4: criptat.cpp
+	$(CC) -o $@ $^ $(CCFLAGS)
 p5: oferta.cpp
 	$(CC) -o $@ $^ $(CCFLAGS)
 
