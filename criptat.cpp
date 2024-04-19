@@ -87,7 +87,6 @@ int main(void) {
         }
     }
 
-    int cap = alphabet.size();
     vector<int> lengths(n + 1, 0);
     int idx = 0;
 
