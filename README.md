@@ -14,7 +14,6 @@ The solution involves a binary search over possible current values to find the o
 
 ### Key Features
 - **Precision Handling**: Calculations are carefully handled with floating-point precision to ensure accurate results up to one decimal place.
-- **Robust and Scalable**: Efficiently handles up to 100,000 servers with diverse power and current requirements.
 
 ### How does this work?
 - **Initial range**: The search range for the optimal current is set between 1 and max_ci, where max_ci is the maximum current requirement of any server. This range is reasonable because supplying less than 1 unit of current or more than any server's maximum requirement doesn't yield better outcomes due to the linear reduction in computing power with current mismatch.
@@ -29,7 +28,6 @@ The solution involves a binary search over possible current values to find the o
 ## COLORING (Colorare)
 
 ### Solution Description
-
 This solution uses a formula found in order to calculate in how many ways the painting can be colored. The painting has a width of 2 centimeters and an arbitrary length N centimeters, and must be colored using only 1x2 tiles. These tiles can be placed either horizontally or vertically but cannot share the same color if they are adjacent.
 
 ### Approach
@@ -38,13 +36,11 @@ This solution uses a formula found in order to calculate in how many ways the pa
 
 
 ### Key Features
-
 - **Efficient Coloring Strategy**: Implements a coloring strategy that respects adjacency restrictions and efficiently calculates the number of valid configurations.
 - **Modular Arithmetic**: Uses modular arithmetic to manage large numbers resulting from combinatorial calculations, ensuring that results stay within feasible computational limits.
 - **Dynamic Input Handling**: Dynamically adjusts to varying lengths of segments and their orientations as provided in the input.
 
 ### How does this work?
-
 - **Initial Coloring**: Starts with the first segment and initializes the number of configurations based on whether it's horizontal or vertical. Horizontal tiles can be placed in 6 ways (3 colors in 2 possible orientations), and vertical tiles can be colored in 3 ways since each occupies exactly two stacked cells.
 - **Propagation**: For each subsequent segment, the solution multiplies the existing number of configurations by the number of valid configurations for the new segment, taking into account the necessary change in color if the new segment is adjacent to the previous one.
 - **Modular Reduction**: Throughout the calculation, all results are taken modulo 10^9 + 7 to keep computations manageable and within integer limits.
@@ -65,4 +61,47 @@ This solution uses a formula found in order to calculate in how many ways the pa
 
 - **Use of Exponentiation**: The final version uses modular exponentiation to quickly compute the number of ways to color large segments of the same type, significantly optimizing the processing time.**
 - **Improved Transition Handling**: Switching between different types of segments (from horizontal to vertical and vice versa) is handled more efficiently, correctly multiplying by the number of ways to transition based on the previously used type.
+
+
+## COMPRESION (Compresie)
+
+### Solution Description
+The primary approach includes verifying if the total sums of A and B are equal. If they are, the solution further employs prefix sums and a two-pointer technique to find the maximum possible length of an identical sequence formed by parts of A and B that match in cumulative sum at various points.
+
+### Approach
+The solution involves the following steps:
+
+- **Sum Verification**: The code checks if the sums of both sequences A and B are equal. If not, the sequences can never be made identical through the defined operations, and the function returns -1.
+- **Prefix Sum Arrays**: The solution constructs prefix sum arrays for both A and B. These arrays help in efficiently computing the sum of any subsequence in constant time.
+- **Comparison of Prefix Sums**: Using a two-pointer technique, the algorithm traverses through the prefix sums of A and B to identify matching segments that contribute to the maximum length of the resultant identical sequence.
+
+### Key Features
+
+- **Efficient Comparison**: By leveraging prefix sums, the algorithm efficiently compares sums of subsequences from both lists, reducing the need for repeated summation.
+- **Optimal Subsequence Identification**: Utilizes a two-pointer technique to optimally find subsequences in A and B that can potentially form the final identical sequence.
+
+### How does this work?
+1. **Prefix Sum Calculation**: Computes prefix sums for sequences A and B. Prefix sums help in determining the sum of any subsequence from the start to any index i, efficiently.
+2. **Two-Pointer Technique**: Uses two pointers, one for each sequence, to traverse the prefix sums:
+    - If the prefix sums at the current pointers are equal, it indicates a potential subsequence from the start to this point in both sequences that could be part of the final identical sequence. Both pointers are advanced, and the potential maximum length is updated.
+    - If the prefix sum of A is less than B at the current pointers, the pointer for A is advanced in an attempt to find a matching prefix sum.
+    - If the prefix sum of B is less, the pointer for B is advanced.
+3. Final Check: After traversing the sequences, if a valid matching sequence is found, its length is returned. If no matching segments are identified, -1 is returned.
+
+
+
+
+## ENCRYPTED (criptat)
+
+### Solution Description
+
+
+### Approach
+
+
+### Key Features
+
+
+### How does this work?
+
 

@@ -16,7 +16,8 @@ using namespace std;
 int rucsac(int n, int W, vector<int> &w, vector<int> &p) {
     // dp este o matrice de dimensiune (n + 1) x (W + 1)
     // pentru că folosim dp[0][*] pentru mulțimea vidă
-    //                   dp[*][0] pentru situația în care ghiozdanul are capacitate 0
+    //                   dp[*][0] pentru situația în care ghiozdanul are
+    //                            capacitate 0
     vector< vector<int> > dp(n + 1, vector<int>(W + 1, 0));
  
     // cazul de bază
@@ -40,18 +41,6 @@ int rucsac(int n, int W, vector<int> &w, vector<int> &p) {
         }
     }
 
-    // auto max_it = max_element(dp[n].begin(), dp[n].end());
-    // int maxValue = *max_it;
-    // // return dp[n][W];
-    // return maxValue;
-
-    // for (int i = 0; i <= n; ++i) {
-    //     for (int j = 0; j <= W; ++j) {
-    //         cout << dp[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
-
     int max_value = 0;
     for (int j = 0; j <= W; ++j) {
         if (dp[n][j] - j > dp[n][j] / 2) {
@@ -72,7 +61,6 @@ int main(void) {
     int n;
     set<char> alphabet;
 
-    // char words[1005][10005];
     vector<vector<char>> words(1005, vector<char>(10005, 0));
 
     fin >> n;

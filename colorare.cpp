@@ -9,11 +9,11 @@ using namespace std;
 long long mod_exp(long long base, int exp) {
     long long result = 1;
     while (exp > 0) {
-        if (exp & 1) { // exp % 2 == 1
+        if (exp & 1) {  // exp % 2 == 1
             result = (result * base) % MOD;
         }
         base = (base * base) % MOD;
-        exp >>= 1; // exp /= 2
+        exp >>= 1;  // exp /= 2
     }
     return result;
 }
@@ -55,7 +55,7 @@ int main() {
             }
 
             // already placed the 1st block of the given sequence
-            --x; 
+            --x;
         }
 
         if (t == H) {  // seq of H after a seq of H
