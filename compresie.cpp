@@ -15,12 +15,11 @@ int array_sum(int *a, int n) {
     return sum;
 }
 
-// Function to find the maximum length of identical subarrays after transformation.
+// Function to find the maximum length of identical subarrays after transform
 int find_max_len(int *a, int n, int *b, int m) {
-
-    // First check if the total sums of arrays A and B are the same.
+    // First check if the total sums of arrays A and B are the same
     if (array_sum(a, n) != array_sum(b, m)) {
-        return -1; // if not equal, no solution can be found
+        return -1;  // if not equal, no solution can be found
     }
 
     int prefix_a[MAX_LEN] = {0};
@@ -35,8 +34,8 @@ int find_max_len(int *a, int n, int *b, int m) {
         prefix_b[i + 1] = prefix_b[i] + b[i];
     }
 
-    int i = 1, j = 1; // Pointers to traverse prefix arrays of A and B.
-    int max_len = 0; 
+    int i = 1, j = 1;  // Pointers to traverse prefix arrays of A and B.
+    int max_len = 0;
 
     // Loop through both prefix arrays to find matching segments.
     while (i <= n && j <= m) {

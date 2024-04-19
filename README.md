@@ -10,7 +10,10 @@ The solution involves a binary search over possible current values to find the o
 
 ### Approach
 - **Binary Search**: Implemented to efficiently find the optimal current value within a predefined range, from 1 to the maximum required current of any server.
-- **Complexity**: The overall time complexity is O(N log M) where N is the number of servers and M is the range of potential current values.
+
+
+### Complexity
+The overall time complexity is O(N log M) where N is the number of servers and M is the range of potential current values.
 
 ### Key Features
 - **Precision Handling**: Calculations are carefully handled with floating-point precision to ensure accurate results up to one decimal place.
@@ -32,7 +35,9 @@ This solution uses a formula found in order to calculate in how many ways the pa
 
 ### Approach
 - **Mathematical formula**: Implemented the linear computation of a formula based on what colors can it use in a rectangle based on the colors of the previous rectangles.
-- **Complexity** The overall time complexity is O(N log M) where N is the number of pairs X and T read from the input and M is the maximum length encountered. Each loop iteration involves a call to mod_exp with a complexity of O(log⁡(x)), where x typically represents the number of blocks of the same type in sequence. The loop runs n times, where n is the number of different segments described in the input file. Each iteration processes one segment, and then reads the next segment from the file.
+
+### Complexity
+The overall time complexity is O(N log M) where N is the number of pairs X and T read from the input and M is the maximum length encountered. Each loop iteration involves a call to mod_exp with a complexity of O(log⁡(x)), where x typically represents the number of blocks of the same type in sequence. The loop runs n times, where n is the number of different segments described in the input file. Each iteration processes one segment, and then reads the next segment from the file.
 
 
 ### Key Features
@@ -89,19 +94,38 @@ The solution involves the following steps:
 3. Final Check: After traversing the sequences, if a valid matching sequence is found, its length is returned. If no matching segments are identified, -1 is returned.
 
 
-
-
 ## ENCRYPTED (criptat)
 
 ### Solution Description
-
+The challenge is to construct the longest possible password by concatenating words from a given list such that one character (the dominant character) appears more times than half the length of the resulting password. Each word can only be used once, and the objective is to find out the maximum length of such a password.
 
 ### Approach
+
+The solution involves:
+
+1. **Character Frequency Analysis**: For each character in the set of all characters appearing in the words, attempt to form the longest valid password where this character is dominant.
+2. **Adapting the Knapsack Problem**: For each character, consider a modified knapsack problem where:
+    - The capacity of the knapsack (W) is determined by the count of non-dominant characters that can be included without violating the dominance condition.
+    - The weights in the knapsack problem correspond to the count of non-dominant characters in each word.
+    - The values correspond to the total length of each word.
+    - The objective is to maximize the total length of selected words while keeping the sum of non-dominant characters within allowable limits.
+3. Dynamic Programming Solution: Use a dynamic programming (DP) table to compute the maximum total length of the password for each possible dominant character. The DP solution for the modified knapsack computes the maximum total length for every possible 'weight' (number of non-dominant characters).
+
+### Complexity
+**Time Complexity**:
+- Building the frequency table for each word takes O(N * L) where N is the number of words and L is the average length of the words.
+- The knapsack DP table is filled in O(N * W) for each character, where W is the sum of non-dominant character counts across all words (which can be approximated as O(N * L) in the worst case).
+- Since this needs to be done for each character in the alphabet (at most 8 times for English letters of an example), the worst-case time complexity is O(8 * N * L), which simplifies to O(N * L) assuming a constant number of characters.
+
+**Space Complexity**:
+- The space complexity is dominated by the DP table, which is O(N * W), and again, approximating W as O(N * L), the space complexity is O(N * L).
 
 
 ### Key Features
 
+Efficient Resource Use: Utilizes dynamic programming to manage and optimize the selection of words based on the constraints of dominant characters, ensuring that the solution is both time and space efficient.
+
 
 ### How does this work?
 
-
+The implementation creates a dynamic table that keeps track of the best possible password length for every considered weight of non-dominant characters. By iterating over each character as a potential dominant character and solving the corresponding knapsack problem, the solution finds the optimal password length for each scenario and finally selects the maximum among these.

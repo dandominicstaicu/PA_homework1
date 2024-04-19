@@ -1,25 +1,10 @@
-./colorare.cpp:12:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-./colorare.cpp:16:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-./colorare.cpp:58:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-./compresie.cpp:37:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
-./compresie.cpp:50:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
-./criptat.cpp:19:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-./criptat.cpp:21:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-./criptat.cpp:21:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-./criptat.cpp:26:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-./criptat.cpp:26:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-./criptat.cpp:32:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-./criptat.cpp:32:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-./criptat.cpp:33:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-./criptat.cpp:37:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-./criptat.cpp:37:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-./criptat.cpp:65:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
-./criptat.cpp:96:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-./criptat.cpp:97:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-./criptat.cpp:104:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-./criptat.cpp:107:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-./criptat.cpp:113:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-./criptat.cpp:136:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./criptat.cpp:34:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./criptat.cpp:54:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+./criptat.cpp:84:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+./criptat.cpp:85:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+./criptat.cpp:92:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+./criptat.cpp:95:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+./criptat.cpp:115:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
 ./oferta.cpp:34:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
 ./oferta.cpp:34:  Extra space before [  [whitespace/braces] [5]
 ./oferta.cpp:37:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
@@ -39,4 +24,4 @@ Done processing ./compresie.cpp
 Done processing ./criptat.cpp
 Done processing ./oferta.cpp
 Done processing ./servere.cpp
-Total errors found: 36
+Total errors found: 21
