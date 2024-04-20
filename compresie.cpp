@@ -1,4 +1,3 @@
-#include <iostream>
 #include <fstream>
 
 using namespace std;
@@ -63,6 +62,7 @@ int main() {
 
     int a[MAX_LEN], b[MAX_LEN], n, m;
 
+    // read input
     fin >> n;
     for (int i = 0; i < n; ++i) {
         fin >> a[i];

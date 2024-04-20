@@ -1,4 +1,3 @@
-#include <iostream>
 #include <fstream>
 #include <set>
 #include <vector>
@@ -7,13 +6,16 @@
 
 using namespace std;
 
+#define MAX_WORDS 1005
+#define MAX_LEN 10005
 
-// code from th PA lab on ocw
+
+// code from th PA lab of dp on ocw.cs.pub.ro
 
 // n   = numărul de obiecte din colecție
 // W   = capacitatea maximă a rucsacului
 // (w[i], p[i]) = caracteristicile obiectului i ($i = 1 : n)
-int rucsac(int n, int W, vector<int> &w, vector<int> &p) {
+int knapsack(int n, int W, vector<int> &w, vector<int> &p) {
     // dp este o matrice de dimensiune (n + 1) x (W + 1)
     // pentru că folosim dp[0][*] pentru mulțimea vidă
     //                   dp[*][0] pentru situația în care ghiozdanul are
@@ -42,14 +44,15 @@ int rucsac(int n, int W, vector<int> &w, vector<int> &p) {
         }
     }
 
+    // this part is custom (not from the lab code)
+    // we need to find the maximum value that is at least half of the total
+    // value of the words so that means the current letter occurs at leas half
     int max_value = 0;
     for (int j = 0; j <= W; ++j) {
         if (dp[n][j] - j > dp[n][j] / 2) {
             max_value = dp[n][j];
         }
     }
-
-    cout << '\n';
 
     return max_value;
 }
@@ -61,15 +64,17 @@ int main(void) {
     int n;
     set<char> alphabet;
 
-    vector<vector<char>> words(1005, vector<char>(10005, 0));
+    vector<vector<char>> words(MAX_WORDS, vector<char>(MAX_LEN, 0));
 
     fin >> n;
     for (int i = 0; i < n; ++i) {
-        char word[10005];
+        char word[MAX_LEN];
         fin >> word;
 
+        // keep the words in a vector of words
         words[i].assign(word, word + strlen(word));
 
+        // keep track of the alphabet (max 8 letters, no duplicates)
         for (int j = 0; words[i][j]; ++j) {
             alphabet.insert(words[i][j]);
         }
@@ -79,8 +84,8 @@ int main(void) {
     int idx = 0;
 
     for (auto it = alphabet.begin(); it != alphabet.end(); ++it) {
-        // weight = nr de litere care nu sunt it
-        // p = lungimea cuvantului
+        // weight = how many letters are different from the current letter it
+        // price = length of the word
         vector<int> p(n + 1, 0);  // len of the words
         vector<int> w(n + 1, 0);  // how many letters are not it
         int sum_w = 0;
@@ -100,8 +105,7 @@ int main(void) {
             sum_w += w[i];
         }
 
-        lengths[idx] = rucsac(n, sum_w, w, p);
-        idx++;
+        lengths[idx++] = knapsack(n, sum_w, w, p);
     }
 
     auto max_it = max_element(lengths.begin(), lengths.end());
